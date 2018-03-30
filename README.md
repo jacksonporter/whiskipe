@@ -1,4 +1,4 @@
-# whiskipe
+# Whiskipe
 This is the repo for developing our own Android Application in the Mobile Application Development Course at Snow College (SE-3630): Whiskipe.
 ## Created by Dallin Shields, Katelyn Peterson and Jackson Porter. 
 
