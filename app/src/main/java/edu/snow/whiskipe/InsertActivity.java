@@ -30,9 +30,9 @@ public class InsertActivity extends AppCompatActivity {
             double qty = Double.parseDouble(priceString);
             Food food = new Food(0, name, qty);
             dbManager.insert(food);
-            Toast.makeText(this, "Candy added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Food item added", Toast.LENGTH_SHORT).show();
         }catch (NumberFormatException nfe){
-            Toast.makeText(this, "Price error", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Quantity error", Toast.LENGTH_LONG).show();
         }
 
         nameEditText.setText("");

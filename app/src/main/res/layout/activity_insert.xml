@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="@string/label_qty"
         android:layout_marginTop="50dp"
-        android:id="@+id/label_price"
+        android:id="@+id/label_qty"
         android:layout_below="@+id/label_name"/>
 
     <EditText
