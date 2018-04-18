@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin">
 
+    <!--Name-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
         android:layout_toRightOf="@+id/label_name"
         android:orientation="horizontal" />
 
+    <!--Quantity-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,6 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/input_name"/>
 
+    <!--Size-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +63,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/input_name"/>
 
+    <!--Add Button-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +74,7 @@
         android:onClick="insert"
         android:layout_centerHorizontal="true"/>
 
+    <!--Back Button-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

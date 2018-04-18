@@ -3,7 +3,6 @@ package edu.snow.whiskipe;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -32,16 +31,16 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     public void updateView() {
-        ArrayList<Food> foodList = dbManager.selectAll();
-        if (foodList.size() > 0) {
+        ArrayList<Item> itemList = dbManager.selectAll();
+        if (itemList.size() > 0) {
             ScrollView scrollView = new ScrollView(this);
             GridLayout grid = new GridLayout(this);
-            grid.setRowCount(foodList.size());
+            grid.setRowCount(itemList.size());
             grid.setColumnCount(4);
 
-            TextView[] ids = new TextView[foodList.size()];
-            EditText[][] namesAndPrices = new EditText[foodList.size()][2];
-            Button[] buttons = new Button[foodList.size()];
+            TextView[] ids = new TextView[itemList.size()];
+            EditText[][] namesAndPrices = new EditText[itemList.size()][2];
+            Button[] buttons = new Button[itemList.size()];
             ButtonHandler bh = new ButtonHandler();
 
             Point size = new Point();
@@ -50,22 +49,22 @@ public class UpdateActivity extends AppCompatActivity {
 
             int i = 0;
 
-            for (Food food : foodList) {
+            for (Item item : itemList) {
                 ids[i] = new TextView(this);
                 ids[i].setGravity(Gravity.CENTER);
-                ids[i].setText("" + food.getId());
+                ids[i].setText("" + item.getId());
 
                 namesAndPrices[i][0] = new EditText(this);
                 namesAndPrices[i][1] = new EditText(this);
-                namesAndPrices[i][0].setText(food.getName());
-                namesAndPrices[i][1].setText("" + food.getQty());
+                namesAndPrices[i][0].setText(item.getName());
+                namesAndPrices[i][1].setText("" + item.getQty());
                 namesAndPrices[i][1].setInputType(InputType.TYPE_CLASS_NUMBER);
-                namesAndPrices[i][0].setId(10 * food.getId());
-                namesAndPrices[i][1].setId(10 * food.getId() + 1);
+                namesAndPrices[i][0].setId(10 * item.getId());
+                namesAndPrices[i][1].setId(10 * item.getId() + 1);
 
                 buttons[i] = new Button(this);
                 buttons[i].setText("Update");
-                buttons[i].setId(food.getId());
+                buttons[i].setId(item.getId());
 
                 buttons[i].setOnClickListener(bh);
 
@@ -93,7 +92,7 @@ public class UpdateActivity extends AppCompatActivity {
             try{
                 double qty = Double.parseDouble(qtyString);
                 dbManager.updateById(foodId, name, qty);
-                Toast.makeText(UpdateActivity.this, "Food item updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateActivity.this, "Item updated", Toast.LENGTH_SHORT).show();
 
                 updateView();
             }catch (NumberFormatException nfe){
