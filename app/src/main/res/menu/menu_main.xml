@@ -20,4 +20,10 @@
         android:title="@string/update"
         android:icon="@android:drawable/ic_menu_edit"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_login"
+        android:icon="?android:attr/fingerprintAuthDrawable"
+        android:title="@string/login"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -105,6 +105,11 @@ import java.util.ArrayList;
                     Intent updateIntent = new Intent(this, UpdateActivity.class);
                     this.startActivity(updateIntent);
                     return true;
+                case R.id.action_login:
+                    Log.w("MainActivity", "Login selected");
+                    Intent loginIntent = new Intent(this, LoginActivity.class);
+                    this.startActivity(loginIntent);
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }

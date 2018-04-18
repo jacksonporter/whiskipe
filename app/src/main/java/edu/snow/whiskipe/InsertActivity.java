@@ -6,9 +6,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * Created by katel on 3/21/2018.
- */
 
 public class InsertActivity extends AppCompatActivity {
     private DatabaseManager dbManager;
@@ -21,14 +18,16 @@ public class InsertActivity extends AppCompatActivity {
 
     public void insert(View v){
         EditText nameEditText = (EditText)findViewById(R.id.input_name);
-        EditText priceEditText = (EditText)findViewById(R.id.input_qty);
+        EditText qtyEditText = (EditText)findViewById(R.id.input_qty);
+        EditText sizeEditText = (EditText)findViewById(R.id.input_size);
 
         String name = nameEditText.getText().toString();
-        String priceString = priceEditText.getText().toString();
+        String qtyString = qtyEditText.getText().toString();
+        String size = sizeEditText.getText().toString();
 
         try{
-            double qty = Double.parseDouble(priceString);
-            Food food = new Food(0, name, qty);
+            double qty = Double.parseDouble(qtyString);
+            Food food = new Food(0, name, qty, size);
             dbManager.insert(food);
             Toast.makeText(this, "Food item added", Toast.LENGTH_SHORT).show();
         }catch (NumberFormatException nfe){
@@ -36,7 +35,7 @@ public class InsertActivity extends AppCompatActivity {
         }
 
         nameEditText.setText("");
-        priceEditText.setText("");
+        qtyEditText.setText("");
     }
 
     public void goBack(View v){

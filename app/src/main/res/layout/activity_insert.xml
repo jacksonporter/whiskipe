@@ -17,13 +17,13 @@
         android:id="@+id/label_name"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/input_name"
-        android:layout_toRightOf="@+id/label_name"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/label_name"
         android:layout_marginLeft="50dp"
-        android:orientation="horizontal"/>
+        android:layout_toRightOf="@+id/label_name"
+        android:orientation="horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,13 +43,30 @@
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/input_name"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_size"
+        android:layout_marginTop="50dp"
+        android:id="@+id/label_size"
+        android:layout_below="@+id/label_qty"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/input_size"
+        android:layout_alignBottom="@+id/label_size"
+        android:layout_toRightOf="@+id/label_size"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/input_name"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_add"
         android:layout_marginTop="50dp"
         android:id="@+id/button_add"
-        android:layout_below="@+id/label_qty"
+        android:layout_below="@+id/label_size"
         android:onClick="insert"
         android:layout_centerHorizontal="true"/>
 
