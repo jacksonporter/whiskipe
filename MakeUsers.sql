@@ -12,3 +12,11 @@ INSERT INTO users (username, firstname, lastname, active) VALUES (
 	'peterson',
 	1
 )
+
+INSERT INTO users (username, firstname, lastname, active) VALUES (
+	'alexthayn',
+	'alex',
+	'thayn',
+	1
+);
+

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,7 +58,7 @@ public class MSSQLConnection {
         }
     }
 
-    public ResultSet executeQuery(String query) throws java.sql.SQLException{
+    public ResultSet executeQuery(String query) throws java.sql.SQLException {
         Statement stmt = conn.createStatement();
         ResultSet reset = stmt.executeQuery(query);
 
@@ -65,6 +66,29 @@ public class MSSQLConnection {
         stmt.close();
 
         return reset;
+    }
+
+    public boolean executeSQL(String execute) throws java.sql.SQLException {
+        Statement stmt = conn.createStatement();
+        boolean toReturn = stmt.execute(execute);
+
+        stmt.close();
+        return toReturn;
+    }
+
+    public int executeSQLGettingID(String execute, int columnIndex) throws java.sql.SQLException {
+        PreparedStatement stmt = conn.prepareStatement(execute, new int[]{columnIndex});
+        stmt.executeUpdate(execute);
+
+        ResultSet results = stmt.getGeneratedKeys(); //get key wanted from query
+
+        int id = -1;
+        while(results.next()) {
+            String idString = results.getString(1);
+            id = Integer.parseInt(idString);
+        }
+        stmt.close();
+        return id;
     }
 
 

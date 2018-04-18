@@ -3,14 +3,20 @@ package edu.snow.whiskipe;
 public class Item {
     private int id;
     private String name;
-    private double qty;
-    private String size;
+    private int qty;
+    private double size;
+    private int userid;
 
-    public Item(int newId, String newName, double newQty, String newSize){
+    public Item(int newId, String newName, int newQty, float newSize, int userid){
         setId(newId);
         setName(newName);
         setQty(newQty);
         setSize(newSize);
+        setUserid(userid);
+    }
+
+    public Item(){
+        //make an empty item object that can be set later.
     }
 
     public void setId(int newId){
@@ -21,12 +27,12 @@ public class Item {
         name = newName;
     }
 
-    public void setQty(double newQty){
-        if (newQty >= 0.0)
+    public void setQty(int newQty){
+        if (newQty >= 0)
             qty = newQty;
     }
 
-    public void setSize(String newSize){
+    public void setSize(double newSize){
         size = newSize;
     }
 
@@ -42,9 +48,19 @@ public class Item {
         return qty;
     }
 
-    public String getSize(){return size;}
+    public double getSize(){return size;}
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 
     public String toString(){
         return id + "; " + name + "; " + qty + ";" + size;
     }
+
+
 }
