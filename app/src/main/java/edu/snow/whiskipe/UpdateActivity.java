@@ -22,17 +22,17 @@ import java.util.ArrayList;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    DatabaseManager dbManager;
+    //DatabaseManager dbManager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbManager = new DatabaseManager(this);
+        //dbManager = new DatabaseManager(this);
         updateView();
     }
 
     public void updateView() {
-        ArrayList<Item> itemList = dbManager.selectAll();
-        if (itemList.size() > 0) {
+        //ArrayList<Item> itemList = dbManager.selectAll();
+        /*if (itemList.size() > 0) {
             ScrollView scrollView = new ScrollView(this);
             GridLayout grid = new GridLayout(this);
             grid.setRowCount(itemList.size());
@@ -76,27 +76,27 @@ public class UpdateActivity extends AppCompatActivity {
                 i++;
             }
             scrollView.addView(grid);
-            setContentView(scrollView);
-        }
+            setContentView(scrollView);*/
+        /*}*/
     }
 
 
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
             int foodId = v.getId();
-            EditText nameET = (EditText) findViewById(10 * foodId);
-            EditText qtyET = (EditText) findViewById(10 * foodId +1);
-            String name = nameET.getText().toString();
-            String qtyString = qtyET.getText().toString();
+            //EditText nameET = (EditText) findViewById(10 * foodId);
+            //EditText qtyET = (EditText) findViewById(10 * foodId +1);
+            //String name = nameET.getText().toString();
+            //String qtyString = qtyET.getText().toString();
 
             try{
-                double qty = Double.parseDouble(qtyString);
-                dbManager.updateById(foodId, name, qty);
-                Toast.makeText(UpdateActivity.this, "Item updated", Toast.LENGTH_SHORT).show();
+                //double qty = Double.parseDouble(qtyString);
+                //dbManager.updateById(foodId, name, qty);
+                //Toast.makeText(UpdateActivity.this, "Item updated", Toast.LENGTH_SHORT).show();
 
-                updateView();
+                //updateView();
             }catch (NumberFormatException nfe){
-                Toast.makeText(UpdateActivity.this, "Quantity error", Toast.LENGTH_LONG).show();
+                //Toast.makeText(UpdateActivity.this, "Quantity error", Toast.LENGTH_LONG).show();
             }
         }
     }

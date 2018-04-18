@@ -7,11 +7,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity{
-        private DatabaseManager dbManager;
+        //private DatabaseManager dbManager;
 
         public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
-            dbManager = new DatabaseManager(this);
+            //dbManager = new DatabaseManager(this);
             setContentView(R.layout.activity_login);
         }
 
@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity{
             String firstname = firstnameEditText.getText().toString();
             String lastname = lastnameEditText.getText().toString();
 
-                User user = new User(0, username, firstname, lastname);
-                dbManager.login(user);
+                User user = new User(username, firstname, lastname);
+                //dbManager.login(user);
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
 
 

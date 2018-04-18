@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MSSQLManager {
+    //Singleton
+    private static MSSQLManager manager;
+
     //Class variables
     private static final String DATABASE_LOCATION = "whiskipedb.ck9qmzz9yyn6.us-west-2.rds.amazonaws.com";
     private static final String DATABASE_USERNAME = "whiskipeadmin";
@@ -20,8 +23,21 @@ public class MSSQLManager {
     //Instance variables
     private MSSQLConnection conn;
 
-    public MSSQLManager(Context context){
+    public MSSQLManager(){
         conn = new MSSQLConnection(MSSQLManager.DATABASE_LOCATION, MSSQLManager.DATABASE_NAME, MSSQLManager.DATABASE_USERNAME, MSSQLManager.DATABASE_PASSWORD);
+        if(conn == null){
+            Log.w("MSSQLManager", "Connection is not active.");
+        }
+        else{
+            Log.w("MSSQLManager", "Connection is active.");
+        }
+    }
+
+    public static synchronized MSSQLManager getInstance(){
+        if(MSSQLManager.manager == null){
+            MSSQLManager.manager = new MSSQLManager();
+        }
+        return MSSQLManager.manager;
     }
 
     public boolean insertItem(Item item){
@@ -75,6 +91,8 @@ public class MSSQLManager {
                 + "','" + user.getLastname()
                 + "', 1);";
 
+        Log.w("MSSQLManager", toExecute);
+
         try {
             int userid = conn.executeSQLGettingID(toExecute, 1);
 
@@ -115,12 +133,15 @@ public class MSSQLManager {
                 + MSSQLManager.TABLE_ITEMS + ".size AS 'Size (Weight in oz.)'"
                 + " FROM " + MSSQLManager.TABLE_USERS + " INNER JOIN " + MSSQLManager.TABLE_ITEMS
                 + " ON " + MSSQLManager.TABLE_USERS + ".ID = " + MSSQLManager.TABLE_ITEMS + ".userid "
-                + " WHERE " + MSSQLManager.TABLE_USERS + ".ID = " + user.getId() + " ;"; //Query to get user items
+                + " WHERE " + MSSQLManager.TABLE_USERS + ".ID = " + user.getId() + ";"; //Query to get user items
 
         try {
             ResultSet results = conn.executeQuery(query); //get results from query
 
+            Log.w("MSSQLManager", "About to enter loop with query, " + query);
+
             while(results.next()){ //Go until all of the rows have been read in
+                Log.w("MSSQLManager", "loopin...");
                 Item tempItem = new Item(); //create a empty item
 
                 tempItem.setId(Integer.parseInt(results.getString(1))); //get id
@@ -137,5 +158,9 @@ public class MSSQLManager {
         }
 
         return items;
+    }
+
+    public String foo() throws java.sql.SQLException{
+        return conn.foo();
     }
 }

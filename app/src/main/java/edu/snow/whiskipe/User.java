@@ -14,6 +14,12 @@ public class User {
         this.lastname = newLastName;
     }
 
+    public User(String newUsername, String newFirstName, String newLastName){
+        this.username = newUsername;
+        this.firstname = newFirstName;
+        this.lastname = newLastName;
+    }
+
     public User(){
         //create empty user
     }

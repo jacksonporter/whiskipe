@@ -1,5 +1,6 @@
 package edu.snow.whiskipe;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 import android.graphics.Point;
 
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -34,6 +36,7 @@ import java.util.ArrayList;
             }
         });*/
 
+            new MakeConnection().execute();
         }
 
         protected void onResume(){
@@ -82,4 +85,33 @@ import java.util.ArrayList;
         }
 
 
+        private class MakeConnection extends AsyncTask {
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                final MSSQLManager manager = MSSQLManager.getInstance();
+                if(manager != null){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Connected!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Not Connected :(", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
+                //User user = new User(1, "jacksonporter", "test", "user");
+
+                //final ArrayList<Item> items = manager.getItems(user);
+
+                return null;
+            }
+        }
     }

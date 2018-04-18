@@ -17,25 +17,25 @@ import java.util.ArrayList;
  */
 
 public class DeleteActivity extends AppCompatActivity{
-    private DatabaseManager dbManager;
+    //private DatabaseManager dbManager;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        dbManager = new DatabaseManager(this);
+        //dbManager = new DatabaseManager(this);
         updateView();
     }
 
     public void updateView(){
-        ArrayList<Item> itemList = dbManager.selectAll();
+        //ArrayList<Item> itemList = dbManager.selectAll();
         RelativeLayout layout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
         RadioGroup group = new RadioGroup(this);
-        for (Item item : itemList){
+       /* for (Item item : itemList){
             RadioButton rb = new RadioButton(this);
             rb.setId(item.getId());
             rb.setText(item.toString());
             group.addView(rb);
-        }
+        }*/
 
         RadioButtonHandler rbh = new RadioButtonHandler();
         group.setOnCheckedChangeListener(rbh);
@@ -64,7 +64,7 @@ public class DeleteActivity extends AppCompatActivity{
 
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener{
         public void onCheckedChanged(RadioGroup group, int checkedId){
-            dbManager.deleteById(checkedId);
+            //dbManager.deleteById(checkedId);
             Toast.makeText(DeleteActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
 
             updateView();

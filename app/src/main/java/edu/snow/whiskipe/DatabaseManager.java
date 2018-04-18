@@ -84,14 +84,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         ArrayList<Item> itemList = new ArrayList<Item>();
         while (cursor.moveToNext()){
-            Item currentItem = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2), cursor.getString(3));
-            itemList.add(currentItem);
+            //Item currentItem = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2), cursor.getString(3));
+            //itemList.add(currentItem);
         }
         db.close();
         return itemList;
     }
 
-    public Item selectById(int id){
+   /* public Item selectById(int id){
         String sqlQuery = "select * from " + TABLE_FOOD;
         sqlQuery += " where " + ID + " = " + id;
 
@@ -100,8 +100,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         Item item = null;
         if(cursor.moveToFirst())
-            item = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2),cursor.getString(3));
+            //item = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2),cursor.getString(3));
         return item;
-    }
+    }*/
 }
 

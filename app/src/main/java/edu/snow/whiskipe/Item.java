@@ -7,7 +7,7 @@ public class Item {
     private double size;
     private int userid;
 
-    public Item(int newId, String newName, int newQty, float newSize, int userid){
+    public Item(int newId, String newName, int newQty, double newSize, int userid){
         setId(newId);
         setName(newName);
         setQty(newQty);
@@ -18,6 +18,13 @@ public class Item {
     public Item(){
         //make an empty item object that can be set later.
     }
+
+    public Item(String newName, int newQty, double newSize){
+        setName(newName);
+        setQty(newQty);
+        setSize(newSize);
+    }
+
 
     public void setId(int newId){
         id = newId;

@@ -8,11 +8,11 @@ import android.widget.Toast;
 
 
 public class InsertActivity extends AppCompatActivity {
-    private DatabaseManager dbManager;
+    //private DatabaseManager dbManager;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        dbManager = new DatabaseManager(this);
+        //dbManager = new DatabaseManager(this);
         setContentView(R.layout.activity_insert);
     }
 
@@ -23,12 +23,14 @@ public class InsertActivity extends AppCompatActivity {
 
         String name = nameEditText.getText().toString();
         String qtyString = qtyEditText.getText().toString();
-        String size = sizeEditText.getText().toString();
+        String sizeString = sizeEditText.getText().toString();
 
         try{
-            double qty = Double.parseDouble(qtyString);
-            Item item = new Item(0, name, qty, size);
-            dbManager.insert(item);
+            int qty = Integer.parseInt(qtyString);
+            double size = Double.parseDouble(sizeString);
+
+            Item item = new Item(name, qty, size);
+            //dbManager.insert(item);
             Toast.makeText(this, "Item added", Toast.LENGTH_SHORT).show();
         }catch (NumberFormatException nfe){
             Toast.makeText(this, "Quantity error", Toast.LENGTH_LONG).show();

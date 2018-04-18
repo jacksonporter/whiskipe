@@ -77,10 +77,14 @@ public class MSSQLConnection {
     }
 
     public int executeSQLGettingID(String execute, int columnIndex) throws java.sql.SQLException {
+        Log.w("MSSQLConnection", "Attempting to execute sql getting id");
         PreparedStatement stmt = conn.prepareStatement(execute, new int[]{columnIndex});
-        stmt.executeUpdate(execute);
+        int done = stmt.executeUpdate(execute);
 
         ResultSet results = stmt.getGeneratedKeys(); //get key wanted from query
+        if(results == null){
+            Log.w("MSSQLConnection", "Crap. No keys.");
+        }
 
         int id = -1;
         while(results.next()) {
@@ -89,6 +93,26 @@ public class MSSQLConnection {
         }
         stmt.close();
         return id;
+    }
+
+    public String foo() throws java.sql.SQLException{
+        Statement stmt = conn.createStatement();
+        ResultSet reset = stmt.executeQuery("select * from users;");
+
+        String result = "";
+
+        while(reset.next()) {
+            try {
+                result += reset.getString(1) + reset.getString(2) + reset.getString(3) + reset.getString(4) + reset.getString(5) + "\n";
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        reset.close();
+        stmt.close();
+
+        return result;
     }
 
 
