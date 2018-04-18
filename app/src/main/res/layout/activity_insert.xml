@@ -9,13 +9,33 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin">
 
+    <!--Home button-->
+    <ImageView
+        android:id="@+id/button_home"
+        android:src="@drawable/whiskipe_logo"
+        android:layout_width="153dp"
+        android:layout_height="140dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" />
+
+    <!--Add Item Title-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_addItem"
+        android:id="@+id/label_addItem"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button_home"/>
+
     <!--Name-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_name"
-        android:layout_marginTop="50dp"
-        android:id="@+id/label_name"/>
+        android:layout_marginTop="30dp"
+        android:id="@+id/label_name"
+        android:layout_below="@id/label_addItem"/>
 
     <EditText
         android:id="@+id/input_name"
@@ -31,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_qty"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/label_qty"
         android:layout_below="@+id/label_name"/>
 
@@ -50,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_size"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/label_size"
         android:layout_below="@+id/label_qty"/>
 
@@ -65,22 +85,24 @@
 
     <!--Add Button-->
     <Button
+        android:id="@+id/button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_add"
-        android:layout_marginTop="50dp"
-        android:id="@+id/button_add"
-        android:layout_below="@+id/label_size"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/label_qty"
         android:onClick="insert"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/button_add" />
 
     <!--Back Button-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_back"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/button_add"
+        android:layout_marginTop="20dp"
         android:onClick="goBack"
-        android:layout_centerHorizontal="true"/>
+        android:layout_toRightOf="@id/button_add"
+        android:layout_alignBottom="@id/button_add"
+        android:layout_marginLeft="20dp"
+        />
 </RelativeLayout>

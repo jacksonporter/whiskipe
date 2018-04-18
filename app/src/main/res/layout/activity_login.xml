@@ -9,15 +9,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin">
-<!--Home button-->
-    <ImageButton
+
+
+    <!--Home button-->
+    <ImageView
         android:id="@+id/button_home"
         android:layout_width="153dp"
         android:layout_height="140dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
-        app:srcCompat="@drawable/whiskipe_logo" />
+        android:src="@drawable/whiskipe_logo" />
+
+    <!--Login Title-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/label_loginTitle"
+        android:id="@+id/label_loginTitle"
+        android:layout_below="@id/button_home"/>
 
     <!--Username-->
     <TextView
@@ -26,7 +37,7 @@
         android:text="@string/label_username"
         android:layout_marginTop="30dp"
         android:id="@+id/label_username"
-        android:layout_below="@+id/button_home"/>
+        android:layout_below="@+id/label_loginTitle"/>
 
     <EditText
         android:id="@+id/input_username"
