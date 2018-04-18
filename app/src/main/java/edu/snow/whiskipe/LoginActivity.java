@@ -34,8 +34,6 @@ public class LoginActivity extends AppCompatActivity{
             lastnameEditText.setText("");
         }
 
-        public void goBack(View v){
-            this.finish();
-        }
+
     }
 
