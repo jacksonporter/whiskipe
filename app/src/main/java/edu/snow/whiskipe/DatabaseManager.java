@@ -16,6 +16,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "foodDB";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_FOOD = "food";
+    private static final String TABLE_USER = "user";
     private static final String ID = "id";
     private static final String NAME = "name";
     private static final String QTY = "qty";
@@ -26,6 +27,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db){
         String sqlCreate = "create table " + TABLE_FOOD + "("+ ID;
+        sqlCreate += " integer primary key autoincrement, " + NAME;
+        sqlCreate += " text, " + QTY + " real )";
+
+        db.execSQL(sqlCreate);
+
+        sqlCreate = "create table " + TABLE_USER + "("+ ID;
         sqlCreate += " integer primary key autoincrement, " + NAME;
         sqlCreate += " text, " + QTY + " real )";
 
@@ -45,6 +52,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(sqlInsert);
         db.close();
     }
+
+/*    public void insert(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlInsert = "insert into " + TABLE_FOOD;
+        sqlInsert += " values( null, '" + food.getName();
+        sqlInsert += "', '" + food.getQty() + "' )";
+        db.execSQL(sqlInsert);
+        db.close();
+    }*/
 
     public void deleteById(int id){
         SQLiteDatabase db = this.getWritableDatabase();

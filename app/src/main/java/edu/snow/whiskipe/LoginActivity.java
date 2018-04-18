@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity{
             String lastname = lastnameEditText.getText().toString();
 
                 User user = new User(0, username, firstname, lastname);
-                dbManager.insert(user);
+                //dbManager.insert(user);
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
 
 
