@@ -26,14 +26,14 @@ public class DeleteActivity extends AppCompatActivity{
     }
 
     public void updateView(){
-        ArrayList<Food> foodList = dbManager.selectAll();
+        ArrayList<Item> itemList = dbManager.selectAll();
         RelativeLayout layout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
         RadioGroup group = new RadioGroup(this);
-        for (Food food: foodList){
+        for (Item item : itemList){
             RadioButton rb = new RadioButton(this);
-            rb.setId(food.getId());
-            rb.setText(food.toString());
+            rb.setId(item.getId());
+            rb.setText(item.toString());
             group.addView(rb);
         }
 
@@ -65,7 +65,7 @@ public class DeleteActivity extends AppCompatActivity{
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener{
         public void onCheckedChanged(RadioGroup group, int checkedId){
             dbManager.deleteById(checkedId);
-            Toast.makeText(DeleteActivity.this, "Food item deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DeleteActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
 
             updateView();
         }

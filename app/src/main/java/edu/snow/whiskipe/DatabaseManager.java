@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Currency;
 
 /**
  * Created by katel on 3/24/2018.
@@ -44,23 +43,19 @@ public class DatabaseManager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(Food food){
+    public void insert(Item item){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_FOOD;
-        sqlInsert += " values( null, '" + food.getName();
-        sqlInsert += "', '" + food.getQty() + "' )";
+        sqlInsert += " values( null, '" + item.getName();
+        sqlInsert += "', '" + item.getQty() + "' )";
         db.execSQL(sqlInsert);
         db.close();
     }
 
-/*    public void insert(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_FOOD;
-        sqlInsert += " values( null, '" + food.getName();
-        sqlInsert += "', '" + food.getQty() + "' )";
-        db.execSQL(sqlInsert);
-        db.close();
-    }*/
+
+    public void login(User user){
+
+    }
 
     public void deleteById(int id){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -82,31 +77,31 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Food>selectAll(){
+    public ArrayList<Item>selectAll(){
         String sqlQuery = "select * from " + TABLE_FOOD;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
 
-        ArrayList<Food> foodList = new ArrayList<Food>();
+        ArrayList<Item> itemList = new ArrayList<Item>();
         while (cursor.moveToNext()){
-            Food currentFood = new Food(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2), cursor.getString(3));
-            foodList.add(currentFood);
+            Item currentItem = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2), cursor.getString(3));
+            itemList.add(currentItem);
         }
         db.close();
-        return foodList;
+        return itemList;
     }
 
-    public Food selectById(int id){
+    public Item selectById(int id){
         String sqlQuery = "select * from " + TABLE_FOOD;
         sqlQuery += " where " + ID + " = " + id;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
 
-        Food food = null;
+        Item item = null;
         if(cursor.moveToFirst())
-            food = new Food(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2),cursor.getString(3));
-        return food;
+            item = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2),cursor.getString(3));
+        return item;
     }
 }
 

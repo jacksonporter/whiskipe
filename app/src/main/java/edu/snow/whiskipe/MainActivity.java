@@ -17,10 +17,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
     public class MainActivity extends AppCompatActivity {
-        private DatabaseManager dbManager;
-        private double total;
-        private ScrollView scrollView;
-        private int buttonWidth;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -38,45 +34,13 @@ import java.util.ArrayList;
             }
         });*/
 
-            dbManager = new DatabaseManager(this);
-            total = 0.0;
-            scrollView = (ScrollView)findViewById(R.id.scrollView);
-            Point size = new Point();
-            getWindowManager().getDefaultDisplay().getSize(size);
-            buttonWidth = size.x/2;
-            updateView();
         }
 
         protected void onResume(){
             super.onResume();
-            updateView();
+
         }
 
-        public void updateView(){
-            ArrayList<Food> foodList = dbManager.selectAll();
-            if(foodList.size()>0){
-                scrollView.removeAllViewsInLayout();
-
-                GridLayout grid = new GridLayout(this);
-                grid.setRowCount(foodList.size()+1/2);
-                grid.setColumnCount(2);
-
-                FoodButton [] buttons = new FoodButton[foodList.size()];
-                ButtonHandler bh = new ButtonHandler();
-
-                int i =0;
-                for(Food food:foodList){
-                    buttons[i] = new FoodButton(this,food);
-                    buttons[i].setText(food.getName()+ "\n" + food.getQty());
-
-                    buttons[i].setOnClickListener(bh);
-
-                    grid.addView(buttons[i], buttonWidth, GridLayout.LayoutParams.WRAP_CONTENT);
-                    i++;
-                }
-                scrollView.addView(grid);
-            }
-        }
 
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,11 +81,5 @@ import java.util.ArrayList;
 
         }
 
-        private class ButtonHandler implements View.OnClickListener{
-            public void onClick(View v){
-                total+=((FoodButton)v).getPrice();
-                String pay = NumberFormat.getCurrencyInstance().format(total);
-                Toast.makeText(MainActivity.this, pay, Toast.LENGTH_LONG).show();
-            }
-        }
+
     }

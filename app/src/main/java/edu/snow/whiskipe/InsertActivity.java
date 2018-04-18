@@ -27,9 +27,9 @@ public class InsertActivity extends AppCompatActivity {
 
         try{
             double qty = Double.parseDouble(qtyString);
-            Food food = new Food(0, name, qty, size);
-            dbManager.insert(food);
-            Toast.makeText(this, "Food item added", Toast.LENGTH_SHORT).show();
+            Item item = new Item(0, name, qty, size);
+            dbManager.insert(item);
+            Toast.makeText(this, "Item added", Toast.LENGTH_SHORT).show();
         }catch (NumberFormatException nfe){
             Toast.makeText(this, "Quantity error", Toast.LENGTH_LONG).show();
         }

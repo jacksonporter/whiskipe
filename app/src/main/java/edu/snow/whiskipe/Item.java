@@ -1,12 +1,12 @@
 package edu.snow.whiskipe;
 
-public class Food {
+public class Item {
     private int id;
     private String name;
     private double qty;
     private String size;
 
-    public Food(int newId, String newName, double newQty, String newSize){
+    public Item(int newId, String newName, double newQty, String newSize){
         setId(newId);
         setName(newName);
         setQty(newQty);
