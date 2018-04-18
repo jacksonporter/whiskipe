@@ -73,7 +73,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         ArrayList<Food> foodList = new ArrayList<Food>();
         while (cursor.moveToNext()){
-            Food currentFood = new Food(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2));
+            Food currentFood = new Food(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2), cursor.getString(3));
             foodList.add(currentFood);
         }
         db.close();
@@ -89,7 +89,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         Food food = null;
         if(cursor.moveToFirst())
-            food = new Food(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2));
+            food = new Food(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2),cursor.getString(3));
         return food;
     }
 }

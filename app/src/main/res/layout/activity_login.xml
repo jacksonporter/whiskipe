@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin">
-
+<!--Home button-->
     <ImageButton
         android:id="@+id/button_home"
         android:layout_width="153dp"
@@ -19,6 +19,7 @@
         android:layout_marginTop="0dp"
         app:srcCompat="@drawable/whiskipe_logo" />
 
+    <!--Username-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
         android:layout_toRightOf="@+id/label_username"
         android:orientation="horizontal" />
 
+    <!--First Name-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +56,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/input_username"/>
 
+    <!--Last Name-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,46 +68,20 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/input_weight"
+        android:id="@+id/input_lastname"
         android:layout_alignBottom="@+id/label_lastname"
         android:layout_toRightOf="@+id/label_lastname"
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/input_username"/>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_active"
-        android:layout_marginTop="30dp"
-        android:id="@+id/label_active"
-        android:layout_below="@+id/label_lastname"/>
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/label_active"
-        android:id="@+id/rbtn_yes"
-        android:layout_alignBottom="@id/label_active"
-        android:layout_alignLeft="@id/input_username"/>
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/rbtn_yes"
-        android:id="@+id/rbtn_no"
-        android:layout_alignBottom="@id/label_active"
-        android:layout_alignLeft="@id/input_username"/>
-
+    <!--Login Button-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_login"
         android:layout_marginTop="20dp"
         android:id="@+id/button_login"
-        android:layout_below="@+id/label_active"
+        android:layout_below="@+id/label_lastname"
         android:onClick="login"
         android:layout_centerHorizontal="true"/>
 

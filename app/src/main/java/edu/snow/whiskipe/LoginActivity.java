@@ -17,23 +17,21 @@ public class LoginActivity extends AppCompatActivity{
 
         public void login(View v){
             EditText usernameEditText = (EditText)findViewById(R.id.input_name);
-            EditText firstnameEditText = (EditText)findViewById(R.id.input_name);
-            EditText lastnameEditText = (EditText)findViewById(R.id.input_name);
+            EditText firstnameEditText = (EditText)findViewById(R.id.input_firstname);
+            EditText lastnameEditText = (EditText)findViewById(R.id.input_lastname);
 
-            String name = nameEditText.getText().toString();
-            String priceString = priceEditText.getText().toString();
+            String username = usernameEditText.getText().toString();
+            String firstname = firstnameEditText.getText().toString();
+            String lastname = lastnameEditText.getText().toString();
 
-            try{
-                double qty = Double.parseDouble(priceString);
-                Food food = new Food(0, name, qty);
-                dbManager.insert(food);
-                Toast.makeText(this, "Food item added", Toast.LENGTH_SHORT).show();
-            }catch (NumberFormatException nfe){
-                Toast.makeText(this, "Quantity error", Toast.LENGTH_LONG).show();
-            }
+                User user = new User(0, username, firstname, lastname);
+                dbManager.insert(user);
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-            nameEditText.setText("");
-            priceEditText.setText("");
+
+            usernameEditText.setText("");
+            firstnameEditText.setText("");
+            lastnameEditText.setText("");
         }
 
         public void goBack(View v){

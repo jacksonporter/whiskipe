@@ -36,6 +36,7 @@ public class InsertActivity extends AppCompatActivity {
 
         nameEditText.setText("");
         qtyEditText.setText("");
+        sizeEditText.setText("");
     }
 
     public void goBack(View v){
