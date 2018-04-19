@@ -24,4 +24,9 @@
     <string name="create_username">Create Username</string>
 
     <string name="button_home">Home</string>
+
+    <string name="website_label">whiskipe.x10host.com</string>
+    <string name="visitwebsite">Visit Website</string>
+    <string name="sendfeedback">Send Feedback</string>
+    <string name="reportbug">Report Bug</string>
 </resources>

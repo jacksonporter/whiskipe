@@ -1,6 +1,7 @@
 package edu.snow.whiskipe;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -97,6 +98,45 @@ public class MainActivity extends AppCompatActivity {
                     updateIntent.putExtra("userfirstname", user.getFirstname());
                     updateIntent.putExtra("userlastname", user.getLastname());
                     this.startActivity(updateIntent);
+                    return true;
+                case R.id.action_feedback:
+                    Log.w("MainActivity", "Feedback action selected");
+                    Uri feedbackaddress = Uri.parse("http://whiskipe.x10host.com/contact/");
+
+                    Intent feedbackIntent = new Intent(Intent.ACTION_VIEW, feedbackaddress);
+                    if(feedbackIntent.resolveActivity(getPackageManager()) != null){
+                        this.startActivity(feedbackIntent);
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Could not open page.", Toast.LENGTH_LONG).show();
+                        Log.w("MainActivity", "Device cannot handle request. Does this device have a web browser?");
+                    }
+                    return true;
+                case R.id.action_bugreport:
+                    Log.w("MainActivity", "Bug report action selected");
+                    Uri bugaddress = Uri.parse("http://whiskipe.x10host.com/bug-report/");
+
+                    Intent bugIntent = new Intent(Intent.ACTION_VIEW, bugaddress);
+                    if(bugIntent.resolveActivity(getPackageManager()) != null){
+                        this.startActivity(bugIntent);
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Could not open page.", Toast.LENGTH_LONG).show();
+                        Log.w("MainActivity", "Device cannot handle request. Does this device have a web browser?");
+                    }
+                    return true;
+                case R.id.action_website:
+                    Log.w("MainActivity", "Website action selected");
+                    Uri address = Uri.parse("http://whiskipe.x10host.com/");
+
+                    Intent websiteIntent = new Intent(Intent.ACTION_VIEW, address);
+                    if(websiteIntent.resolveActivity(getPackageManager()) != null){
+                        this.startActivity(websiteIntent);
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Could not open page.", Toast.LENGTH_LONG).show();
+                        Log.w("MainActivity", "Device cannot handle request. Does this device have a web browser?");
+                    }
                     return true;
                 case R.id.action_logout:
                     Log.w("MainActivity", "Logout selected");

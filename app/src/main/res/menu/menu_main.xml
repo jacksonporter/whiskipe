@@ -21,6 +21,28 @@
         android:icon="@android:drawable/ic_menu_edit"
         app:showAsAction="ifRoom" />
 
+    <!-- make sure to update icon -->
+    <item
+        android:id="@+id/action_feedback"
+        android:icon="?android:attr/fingerprintAuthDrawable"
+        android:title="@string/sendfeedback"
+        app:showAsAction="ifRoom" />
+
+    <!-- make sure to update icon -->
+    <item
+        android:id="@+id/action_bugreport"
+        android:icon="?android:attr/fingerprintAuthDrawable"
+        android:title="@string/reportbug"
+        app:showAsAction="ifRoom" />
+
+    <!-- make sure to update icon -->
+    <item
+        android:id="@+id/action_website"
+        android:icon="?android:attr/fingerprintAuthDrawable"
+        android:title="@string/visitwebsite"
+        app:showAsAction="ifRoom" />
+
+    <!-- make sure to update icon -->
     <item
         android:id="@+id/action_logout"
         android:icon="?android:attr/fingerprintAuthDrawable"
