@@ -17,8 +17,9 @@ import android.graphics.Point;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
-    public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ import java.util.ArrayList;
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                final MSSQLManager manager = MSSQLManager.getInstance();
+                MSSQLManager manager = MSSQLManager.getInstance();
                 if(manager != null){
                     runOnUiThread(new Runnable() {
                         @Override
@@ -107,9 +108,37 @@ import java.util.ArrayList;
                     });
                 }
 
-                //User user = new User(1, "jacksonporter", "test", "user");
+               /* User user = new User(2, "katelynpeterson", "katelyn", "peterson");
+                final ArrayList<Item> items = manager.getItems(user);
 
-                //final ArrayList<Item> items = manager.getItems(user);
+                if(items == null){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "CRAP", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
+                for(int i = 0; i < items.size(); i++){
+                    Log.w("MainActivity", i + ": " + items.get(i).getName());
+                }
+
+                *//*try {
+                    Log.w("MainActivity", "FLAG: " + manager.foo());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }*/
+
+                User user1 = new User("alexthayn", "alex", "thayn");
+                user1.setId(3);
+
+                ArrayList<Item> items = manager.getItems(user1);
+
+                for(int i = 0; i < items.size(); i++){
+                    manager.deleteItem(items.get(i));
+                    i++;
+                }
 
                 return null;
             }

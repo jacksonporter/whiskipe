@@ -40,22 +40,25 @@ public class MSSQLManager {
         return MSSQLManager.manager;
     }
 
-    public boolean insertItem(Item item){
-        String toExecute = "INSERT INTO " + MSSQLManager.TABLE_USERS
+    public boolean insertItem(Item item, User user){
+        String toExecute = "INSERT INTO " + MSSQLManager.TABLE_ITEMS
                 + " ("
                 + MSSQLManager.TABLE_ITEMS + ".name,"
                 + MSSQLManager.TABLE_ITEMS + ".quantity,"
                 + MSSQLManager.TABLE_ITEMS + ".size,"
                 + MSSQLManager.TABLE_ITEMS + ".userid"
-                + ") VALUES ("
+                + ") OUTPUT INSERTED.ID VALUES ("
                 + "'" + item.getName()
                 + "'," + item.getQty()
                 + "," + item.getSize()
-                + "," + item.getUserid()
+                + "," + user.getId()
                 + ");";
 
+        Log.w("MSSQLManager", "Insert item execution: " + toExecute);
+
         try {
-            int itemid = conn.executeSQLGettingID(toExecute, 1);
+            int itemid = conn.executeSQLGettingID(toExecute);
+            Log.w("MSSQLManager", "Got item id");
 
             if(itemid < 0){
                 return false;
@@ -65,7 +68,7 @@ public class MSSQLManager {
                 return true;
             }
         } catch (SQLException e) {
-            Log.w("MSSQLManager", "Error in inserting user.");
+            Log.w("MSSQLManager", "Error in inserting item.");
             return false;
         }
     }
@@ -85,16 +88,14 @@ public class MSSQLManager {
 
     public boolean insertUser(User user){
         String toExecute = "INSERT INTO " + MSSQLManager.TABLE_USERS
-                + " (username, firstname, lastname, active) VALUES ("
+                + " (username, firstname, lastname, active) OUTPUT INSERTED.ID VALUES ("
                 + "'" + user.getUsername()
                 + "','" + user.getFirstname()
                 + "','" + user.getLastname()
                 + "', 1);";
 
-        Log.w("MSSQLManager", toExecute);
-
         try {
-            int userid = conn.executeSQLGettingID(toExecute, 1);
+            int userid = conn.executeSQLGettingID(toExecute);
 
             if(userid < 0){
                 return false;
@@ -126,32 +127,32 @@ public class MSSQLManager {
     public ArrayList<Item> getItems(User user){
         ArrayList<Item> items = new ArrayList<Item>(); //Make an empty arraylist of items to return
 
-        String query = "SELECT " + MSSQLManager.TABLE_USERS + ".ID AS 'ID',"
+        String query = "SELECT " + MSSQLManager.TABLE_ITEMS + ".ID AS 'ID',"
                 + MSSQLManager.TABLE_USERS + ".username AS 'Username',"
                 + MSSQLManager.TABLE_ITEMS + ".name AS 'Item Name',"
                 + MSSQLManager.TABLE_ITEMS + ".quantity AS 'Quantity',"
                 + MSSQLManager.TABLE_ITEMS + ".size AS 'Size (Weight in oz.)'"
                 + " FROM " + MSSQLManager.TABLE_USERS + " INNER JOIN " + MSSQLManager.TABLE_ITEMS
                 + " ON " + MSSQLManager.TABLE_USERS + ".ID = " + MSSQLManager.TABLE_ITEMS + ".userid "
-                + " WHERE " + MSSQLManager.TABLE_USERS + ".ID = " + user.getId() + ";"; //Query to get user items
+        + " WHERE " + MSSQLManager.TABLE_USERS + ".ID = " + user.getId() + ";"; //Query to get user items
+
+        Log.w("MSSQLManager", "TAG: " + query);
 
         try {
             ResultSet results = conn.executeQuery(query); //get results from query
 
-            Log.w("MSSQLManager", "About to enter loop with query, " + query);
-
             while(results.next()){ //Go until all of the rows have been read in
-                Log.w("MSSQLManager", "loopin...");
                 Item tempItem = new Item(); //create a empty item
 
                 tempItem.setId(Integer.parseInt(results.getString(1))); //get id
                 tempItem.setName(results.getString(3)); //get name
                 tempItem.setQty(Integer.parseInt(results.getString(4))); //get quantity
                 tempItem.setSize(Double.parseDouble(results.getString(5))); //get size
-                tempItem.setUserid(user.getId());
 
                 items.add(tempItem);
             }
+
+            results.close();
         } catch (SQLException e) {
             Log.w("MSSQLManager", "Error in getting user items.");
             return null;

@@ -5,14 +5,12 @@ public class Item {
     private String name;
     private int qty;
     private double size;
-    private int userid;
 
-    public Item(int newId, String newName, int newQty, double newSize, int userid){
+    public Item(int newId, String newName, int newQty, double newSize){
         setId(newId);
         setName(newName);
         setQty(newQty);
         setSize(newSize);
-        setUserid(userid);
     }
 
     public Item(){
@@ -56,14 +54,6 @@ public class Item {
     }
 
     public double getSize(){return size;}
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
 
     public String toString(){
         return id + "; " + name + "; " + qty + ";" + size;

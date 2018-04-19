@@ -58,41 +58,42 @@ public class MSSQLConnection {
         }
     }
 
-    public ResultSet executeQuery(String query) throws java.sql.SQLException {
-        Statement stmt = conn.createStatement();
-        ResultSet reset = stmt.executeQuery(query);
-
-        reset.close();
-        stmt.close();
-
-        return reset;
-    }
-
     public boolean executeSQL(String execute) throws java.sql.SQLException {
         Statement stmt = conn.createStatement();
         boolean toReturn = stmt.execute(execute);
 
-        stmt.close();
+        //stmt.close();
         return toReturn;
     }
 
-    public int executeSQLGettingID(String execute, int columnIndex) throws java.sql.SQLException {
+    public int executeSQLGettingID(String execute) throws java.sql.SQLException {
         Log.w("MSSQLConnection", "Attempting to execute sql getting id");
-        PreparedStatement stmt = conn.prepareStatement(execute, new int[]{columnIndex});
-        int done = stmt.executeUpdate(execute);
-
-        ResultSet results = stmt.getGeneratedKeys(); //get key wanted from query
-        if(results == null){
-            Log.w("MSSQLConnection", "Crap. No keys.");
-        }
+        Statement stmt = conn.createStatement();
+        ResultSet results = stmt.executeQuery(execute);
+        Log.w("MSSQLConnection", "ResultSet made.");
 
         int id = -1;
         while(results.next()) {
             String idString = results.getString(1);
             id = Integer.parseInt(idString);
         }
-        stmt.close();
+
+        Log.w("MSSQLConnection", "Id is: " + id);
+
+        //stmt.close();
         return id;
+    }
+
+    public ResultSet executeQuery(String query) throws java.sql.SQLException {
+        Statement stmt = conn.createStatement();
+        Log.w("MSSQLConnection", "Statement made.");
+        ResultSet reset = stmt.executeQuery(query);
+        Log.w("MSSQLConnection", "ResultSet made.");
+
+        //reset.close();
+        //stmt.close();
+
+        return reset;
     }
 
     public String foo() throws java.sql.SQLException{
