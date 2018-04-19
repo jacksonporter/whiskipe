@@ -9,11 +9,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashActivity extends Activity {
-
+    //TimedTask t = new TimedTask();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        startSplash();
+        //t.run();
     }
 
     private void startSplash(){
@@ -26,7 +28,8 @@ public class SplashActivity extends Activity {
 
         @Override
         public void run() {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+           // startSplash();
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }

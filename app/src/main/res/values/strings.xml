@@ -20,5 +20,7 @@
     <string name="label_active">Active</string>
     <string name="button_login">Login</string>
 
+    <string name="create_username">Create Username</string>
+
     <string name="button_home">Home</string>
 </resources>
