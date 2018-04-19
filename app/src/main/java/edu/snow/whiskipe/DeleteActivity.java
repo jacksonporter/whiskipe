@@ -1,5 +1,6 @@
 package edu.snow.whiskipe;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by katel on 3/24/2018.
  */
 
-public class DeleteActivity extends AppCompatActivity{
+public class DeleteActivity extends AppCompatActivity {
     //private DatabaseManager dbManager;
 
     public void onCreate(Bundle savedInstanceState){

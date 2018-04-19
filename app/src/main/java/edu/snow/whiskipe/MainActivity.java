@@ -1,5 +1,6 @@
 package edu.snow.whiskipe;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-
-            new MakeConnection().execute();
         }
 
         protected void onResume(){
@@ -83,64 +82,5 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-        }
-
-
-        private class MakeConnection extends AsyncTask {
-
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                MSSQLManager manager = MSSQLManager.getInstance();
-                if(manager != null){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getBaseContext(), "Connected!", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                else{
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getBaseContext(), "Not Connected :(", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-
-               /* User user = new User(2, "katelynpeterson", "katelyn", "peterson");
-                final ArrayList<Item> items = manager.getItems(user);
-
-                if(items == null){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getBaseContext(), "CRAP", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-
-                for(int i = 0; i < items.size(); i++){
-                    Log.w("MainActivity", i + ": " + items.get(i).getName());
-                }
-
-                *//*try {
-                    Log.w("MainActivity", "FLAG: " + manager.foo());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }*/
-
-                User user1 = new User("alexthayn", "alex", "thayn");
-                user1.setId(3);
-
-                ArrayList<Item> items = manager.getItems(user1);
-
-                for(int i = 0; i < items.size(); i++){
-                    manager.deleteItem(items.get(i));
-                    i++;
-                }
-
-                return null;
-            }
         }
     }

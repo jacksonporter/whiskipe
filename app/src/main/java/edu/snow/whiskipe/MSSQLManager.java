@@ -116,6 +116,8 @@ public class MSSQLManager {
                 + ".active = 0 WHERE " + MSSQLManager.TABLE_USERS
                 + ".ID = " + user.getId() + ";";
 
+        Log.w("MSSQLManager", "Delete user execute: " + toExecute);
+
         try {
             return conn.executeSQL(toExecute);
         } catch (SQLException e) {
@@ -163,5 +165,42 @@ public class MSSQLManager {
 
     public String foo() throws java.sql.SQLException{
         return conn.foo();
+    }
+
+    public User userExists(String username){
+        String query = "SELECT " + MSSQLManager.TABLE_USERS + ".ID AS 'ID',"
+                + MSSQLManager.TABLE_USERS + ".firstname AS 'First Name',"
+                + MSSQLManager.TABLE_USERS + ".lastname AS 'Last Name'"
+                + " FROM " + MSSQLManager.TABLE_USERS
+                + " WHERE " + MSSQLManager.TABLE_USERS + ".username ='" + username + "' AND " + MSSQLManager.TABLE_USERS + ".active = 1;"; //Query to get user items
+
+        Log.w("MSSQLManager", "userexists query: " + query);
+
+        try {
+            ResultSet results = conn.executeQuery(query); //get results from query
+
+            String firstname = "EMPTYFIRST";
+            String lastname = "EMPTYLAST";
+            int id = -1;
+
+            while(results.next()){ //Go until all of the rows have been read in
+                firstname = results.getString(2);
+                lastname = results.getString(3);
+                id = results.getInt(1);
+            }
+
+            if(id == -1){
+                return null;
+            }
+
+            User user = new User(id, username, firstname, lastname);
+
+            results.close();
+
+            return user;
+        } catch (SQLException e) {
+            Log.w("MSSQLManager", "Error in checkin' if user is there.");
+            return null;
+        }
     }
 }
