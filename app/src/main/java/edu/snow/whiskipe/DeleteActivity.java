@@ -1,6 +1,7 @@
 package edu.snow.whiskipe;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,25 +19,35 @@ import java.util.ArrayList;
  */
 
 public class DeleteActivity extends AppCompatActivity {
-    //private DatabaseManager dbManager;
+    private MSSQLManager database;
+    private User user;
+    private ArrayList<Item> items;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        //dbManager = new DatabaseManager(this);
-        updateView();
+
+        database = MSSQLManager.getInstance();
+
+        user = new User();
+        Bundle extras = getIntent().getExtras();
+        user.setId(extras.getInt("userid"));
+        user.setUsername(extras.getString("username"));
+        user.setFirstname(extras.getString("username"));
+        user.setLastname(extras.getString("username"));
+
+        new MakeConnection().execute();
     }
 
     public void updateView(){
-        //ArrayList<Item> itemList = dbManager.selectAll();
         RelativeLayout layout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
         RadioGroup group = new RadioGroup(this);
-       /* for (Item item : itemList){
+        for (Item item : items){
             RadioButton rb = new RadioButton(this);
             rb.setId(item.getId());
             rb.setText(item.toString());
             group.addView(rb);
-        }*/
+        }
 
         RadioButtonHandler rbh = new RadioButtonHandler();
         group.setOnCheckedChangeListener(rbh);
@@ -69,6 +80,23 @@ public class DeleteActivity extends AppCompatActivity {
             Toast.makeText(DeleteActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
 
             updateView();
+        }
+    }
+
+    private class MakeConnection extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            items = database.getItems(user);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    updateView();
+                }
+            });
+            
+            return null;
         }
     }
 }
