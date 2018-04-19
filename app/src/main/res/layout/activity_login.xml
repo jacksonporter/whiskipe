@@ -40,7 +40,7 @@
         android:layout_below="@+id/label_loginTitle"/>
 
     <EditText
-        android:id="@+id/input_username"
+        android:id="@+id/edittext_usernamenew"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/label_username"
@@ -48,19 +48,24 @@
         android:layout_toRightOf="@+id/label_username"
         android:orientation="horizontal" />
 
-
     <!--Login Button-->
     <Button
+        android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_login"
-        android:layout_marginTop="20dp"
-        android:id="@+id/button_login"
         android:layout_below="@+id/label_username"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:onClick="login"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/button_login" />
 
-
-
-
+    <Button
+        android:id="@+id/button_createuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="174dp"
+        android:onClick="createUser"
+        android:text="@string/button_createuser" />
 </RelativeLayout>

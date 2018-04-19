@@ -1,6 +1,5 @@
 package edu.snow.whiskipe;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,13 +21,59 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         public void login(View v){
-            usernameEditText = (EditText)findViewById(R.id.input_username);
+            usernameEditText = (EditText)findViewById(R.id.edittext_usernamenew);
             username = usernameEditText.getText().toString();
 
-            new MakeConnection().execute();
+            new LoginTask().execute();
         }
 
-    private class MakeConnection extends AsyncTask {
+        public void createUser(View v){
+            Intent createIntent = new Intent (this, CreateUserActivity.class);
+            this.startActivity(createIntent);
+            finish();
+        }
+
+        private class LoginTask extends AsyncTask {
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                user = database.userExists(username);
+
+                if(user == null){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                            usernameEditText.setText("");
+                        }
+                    });
+
+
+                }
+                else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Login Successful\nWelcome " + user.getFirstname(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("userid", user.getId());
+                    intent.putExtra("username", user.getUsername());
+                    intent.putExtra("userfirstname", user.getFirstname());
+                    intent.putExtra("userlastname", user.getLastname());
+
+                    startActivity(intent);
+                    finish();
+                }
+
+
+                return null;
+            }
+        }
+
+    private class MakeUserTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {

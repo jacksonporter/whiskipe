@@ -124,8 +124,12 @@ public class MSSQLManager {
     public boolean deleteUser(User user){ //sets user to inactive on database
         String toExecute = "UPDATE " + MSSQLManager.TABLE_USERS
                 + " SET " + MSSQLManager.TABLE_USERS
-                + ".active = 0 WHERE " + MSSQLManager.TABLE_USERS
+                + ".active = 0 OUTPUT deleted.ID WHERE " + MSSQLManager.TABLE_USERS
                 + ".ID = " + user.getId() + ";";
+
+        /*String removeItems = "DELETE FROM " + MSSQLManager.TABLE_ITEMS
+                + " WHERE " + MSSQLManager.TABLE_USERS
+                + ".userid = " + user.getId() + ";";*/
 
         Log.w("MSSQLManager", "Delete user execute: " + toExecute);
 
@@ -239,6 +243,39 @@ public class MSSQLManager {
             return result;
         } catch (SQLException e) {
             Log.w("MSSQLManager", "Error in updating item.");
+            return false;
+        }
+    }
+
+    public boolean createUser(User user) {
+        String toExecute = "INSERT INTO " + MSSQLManager.TABLE_USERS
+                + " ("
+                + MSSQLManager.TABLE_USERS + ".username,"
+                + MSSQLManager.TABLE_USERS + ".firstname,"
+                + MSSQLManager.TABLE_USERS + ".lastname,"
+                + MSSQLManager.TABLE_USERS + ".active"
+                + ") OUTPUT INSERTED.ID VALUES ("
+                + "'" + user.getUsername()
+                + "','" + user.getFirstname()
+                + "','" + user.getLastname()
+                + "'," + 1
+                + ");";
+
+        Log.w("MSSQLManager", "Insert user execution: " + toExecute);
+
+        try {
+            int userid = conn.executeSQLGettingID(toExecute);
+            Log.w("MSSQLManager", "Got user id");
+
+            if(userid < 0){
+                return false;
+            }
+            else{
+                user.setId(userid);
+                return true;
+            }
+        } catch (SQLException e) {
+            Log.w("MSSQLManager", "Error in inserting user.");
             return false;
         }
     }

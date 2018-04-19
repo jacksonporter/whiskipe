@@ -138,6 +138,12 @@ public class MainActivity extends AppCompatActivity {
                         Log.w("MainActivity", "Device cannot handle request. Does this device have a web browser?");
                     }
                     return true;
+                case R.id.action_deleteUser:
+                    Log.w("MainActivity", "Delete user action selected");
+
+                    new DeleteUserTask().execute();
+
+                    return true;
                 case R.id.action_logout:
                     Log.w("MainActivity", "Logout selected");
                     Intent loginIntent = new Intent(this, LoginActivity.class);
@@ -151,4 +157,33 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+    private class DeleteUserTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            if( database.deleteUser(user)){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Clearing your data!", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+            }else{
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Couldn't delete your user!", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            Intent loginIntent1 = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(loginIntent1);
+
+            return null;
+        }
+    }
     }

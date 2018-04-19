@@ -80,6 +80,7 @@
         android:id="@+id/input_size"
         android:layout_alignBottom="@+id/label_size"
         android:layout_toRightOf="@+id/label_size"
+        android:inputType="numberDecimal"
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/input_name"/>
 

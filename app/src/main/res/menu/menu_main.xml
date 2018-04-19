@@ -44,6 +44,13 @@
 
     <!-- make sure to update icon -->
     <item
+        android:id="@+id/action_deleteUser"
+        android:icon="?android:attr/fingerprintAuthDrawable"
+        android:title="@string/deleteUser"
+        app:showAsAction="ifRoom" />
+
+    <!-- make sure to update icon -->
+    <item
         android:id="@+id/action_logout"
         android:icon="?android:attr/fingerprintAuthDrawable"
         android:title="@string/logout"

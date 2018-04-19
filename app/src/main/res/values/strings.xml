@@ -20,6 +20,10 @@
     <string name="label_lastname">Last Name</string>
     <string name="label_active">Active</string>
     <string name="button_login">Login</string>
+    <string name="button_createuser">Create User</string>
+
+    <string name="label_createUserTitle">Create Whiskipe Account</string>
+    <string name="button_createAccount">Create Account</string>
 
     <string name="create_username">Create Username</string>
 
@@ -29,4 +33,5 @@
     <string name="visitwebsite">Visit Website</string>
     <string name="sendfeedback">Send Feedback</string>
     <string name="reportbug">Report Bug</string>
+    <string name="deleteUser">Delete User</string>
 </resources>
