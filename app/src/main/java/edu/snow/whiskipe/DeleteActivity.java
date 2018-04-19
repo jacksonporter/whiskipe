@@ -118,11 +118,11 @@ public class DeleteActivity extends AppCompatActivity {
                 public void run() {
                     if(worked){
                         Toast.makeText(DeleteActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
-                        updateView();
+                        new GetItems().execute();
                     }
                     else{
                         Toast.makeText(DeleteActivity.this, "Item couldn't be deleted.", Toast.LENGTH_SHORT).show();
-                        updateView();
+                        new GetItems().execute();
                     }
                 }
             });

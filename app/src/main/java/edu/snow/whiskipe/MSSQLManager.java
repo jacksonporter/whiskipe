@@ -214,4 +214,32 @@ public class MSSQLManager {
             return null;
         }
     }
+
+    public boolean updateItem(Item item){
+        String toExecute = "UPDATE " + MSSQLManager.TABLE_ITEMS
+                + " SET "
+                + MSSQLManager.TABLE_ITEMS + ".name = '" + item.getName() + "',"
+                + MSSQLManager.TABLE_ITEMS + ".quantity = " + item.getQty() + ","
+                + MSSQLManager.TABLE_ITEMS + ".size = " + item.getSize() + ""
+                + " OUTPUT deleted.id AS 'Changed Item Id'"
+                + " WHERE " + MSSQLManager.TABLE_ITEMS
+                + ".ID = " + item.getId()
+                + ";";
+        try {
+            boolean result = conn.executeSQL(toExecute);
+            Log.w("MSSQLManager", "Update execute statement: " + toExecute);
+
+            if(result){
+                Log.w("MSSQLManager", "Result to update item was true.");
+            }
+            else{
+                Log.w("MSSQLManager", "Result to Update item was false.");
+            }
+
+            return result;
+        } catch (SQLException e) {
+            Log.w("MSSQLManager", "Error in updating item.");
+            return false;
+        }
+    }
 }

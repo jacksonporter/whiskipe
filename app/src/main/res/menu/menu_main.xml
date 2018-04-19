@@ -22,8 +22,8 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_login"
+        android:id="@+id/action_logout"
         android:icon="?android:attr/fingerprintAuthDrawable"
-        android:title="@string/login"
+        android:title="@string/logout"
         app:showAsAction="ifRoom" />
 </menu>

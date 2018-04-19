@@ -98,14 +98,12 @@ public class MainActivity extends AppCompatActivity {
                     updateIntent.putExtra("userlastname", user.getLastname());
                     this.startActivity(updateIntent);
                     return true;
-                case R.id.action_login:
-                    Log.w("MainActivity", "Login selected");
+                case R.id.action_logout:
+                    Log.w("MainActivity", "Logout selected");
                     Intent loginIntent = new Intent(this, LoginActivity.class);
-                    loginIntent.putExtra("userid", user.getId());
-                    loginIntent.putExtra("username", user.getUsername());
-                    loginIntent.putExtra("userfirstname", user.getFirstname());
-                    loginIntent.putExtra("userlastname", user.getLastname());
+                    Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
                     this.startActivity(loginIntent);
+                    finish();
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);
