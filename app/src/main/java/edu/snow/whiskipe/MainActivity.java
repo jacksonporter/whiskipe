@@ -21,10 +21,25 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+        private MSSQLManager database;
+        private User user;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            database = MSSQLManager.getInstance();
+
+            //Make user
+            user = new User();
+            Bundle extras = getIntent().getExtras();
+            user.setId(extras.getInt("userid"));
+            user.setUsername(extras.getString("username"));
+            user.setFirstname(extras.getString("username"));
+            user.setLastname(extras.getString("username"));
+
+            //Log.w("MainActivity", "User: " + user);
+
             setContentView(R.layout.activity_main);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -41,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         protected void onResume(){
             super.onResume();
-
         }
 
 
@@ -60,21 +74,37 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_add:
                     Log.w("MainActivity", "Add selected");
                     Intent insertIntent = new Intent (this, InsertActivity.class);
+                    insertIntent.putExtra("userid", user.getId());
+                    insertIntent.putExtra("username", user.getUsername());
+                    insertIntent.putExtra("userfirstname", user.getFirstname());
+                    insertIntent.putExtra("userlastname", user.getLastname());
                     this.startActivity(insertIntent);
                     return true;
                 case R.id.action_delete:
                     Log.w("MainActivity", "Delete selected");
                     Intent deleteIntent = new Intent(this, DeleteActivity.class);
+                    deleteIntent.putExtra("userid", user.getId());
+                    deleteIntent.putExtra("username", user.getUsername());
+                    deleteIntent.putExtra("userfirstname", user.getFirstname());
+                    deleteIntent.putExtra("userlastname", user.getLastname());
                     this.startActivity(deleteIntent);
                     return true;
                 case R.id.action_update:
                     Log.w("MainActivity", "Update selected");
                     Intent updateIntent = new Intent(this, UpdateActivity.class);
+                    updateIntent.putExtra("userid", user.getId());
+                    updateIntent.putExtra("username", user.getUsername());
+                    updateIntent.putExtra("userfirstname", user.getFirstname());
+                    updateIntent.putExtra("userlastname", user.getLastname());
                     this.startActivity(updateIntent);
                     return true;
                 case R.id.action_login:
                     Log.w("MainActivity", "Login selected");
                     Intent loginIntent = new Intent(this, LoginActivity.class);
+                    loginIntent.putExtra("userid", user.getId());
+                    loginIntent.putExtra("username", user.getUsername());
+                    loginIntent.putExtra("userfirstname", user.getFirstname());
+                    loginIntent.putExtra("userlastname", user.getLastname());
                     this.startActivity(loginIntent);
                     return true;
                 default:

@@ -55,4 +55,12 @@ public class User {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    public String toString(){
+        try{
+            return id + "," + username + "," + firstname + "," + lastname;
+        }catch(NullPointerException e){
+            return "NO SET ID" + "," + username + "," + firstname + "," + lastname;
+        }
+    }
 }
