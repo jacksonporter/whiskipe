@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             user.setId(extras.getInt("userid"));
             user.setUsername(extras.getString("username"));
-            user.setFirstname(extras.getString("username"));
-            user.setLastname(extras.getString("username"));
+            user.setFirstname(extras.getString("userfirstname"));
+            user.setLastname(extras.getString("userlastname"));
 
             //Log.w("MainActivity", "User: " + user);
 

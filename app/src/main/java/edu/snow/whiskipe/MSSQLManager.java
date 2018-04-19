@@ -75,13 +75,24 @@ public class MSSQLManager {
 
     public boolean deleteItem(Item item){
         String toExecute = "DELETE FROM " + MSSQLManager.TABLE_ITEMS
+                + " OUTPUT deleted.name "
                 + " WHERE " + MSSQLManager.TABLE_ITEMS
                 + ".ID = " + item.getId()
                 + ";";
         try {
-            return conn.executeSQL(toExecute);
+            boolean result = conn.executeSQL(toExecute);
+            Log.w("MSSQLManager", "To delete execute statement: " + toExecute);
+
+            if(result){
+                Log.w("MSSQLManager", "Result to delete item was true.");
+            }
+            else{
+                Log.w("MSSQLManager", "Result to delete item was false.");
+            }
+
+            return result;
         } catch (SQLException e) {
-            Log.w("MSSQLManager", "Error in setting user to inactive.");
+            Log.w("MSSQLManager", "Error in deleting item.");
             return false;
         }
     }

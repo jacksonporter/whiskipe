@@ -22,6 +22,7 @@ public class DeleteActivity extends AppCompatActivity {
     private MSSQLManager database;
     private User user;
     private ArrayList<Item> items;
+    private Item toDelete;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -32,10 +33,12 @@ public class DeleteActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         user.setId(extras.getInt("userid"));
         user.setUsername(extras.getString("username"));
-        user.setFirstname(extras.getString("username"));
-        user.setLastname(extras.getString("username"));
+        user.setFirstname(extras.getString("userfirstname"));
+        user.setLastname(extras.getString("userlastname"));
 
-        new MakeConnection().execute();
+        toDelete = null;
+
+        new GetItems().execute();
     }
 
     public void updateView(){
@@ -76,14 +79,17 @@ public class DeleteActivity extends AppCompatActivity {
 
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener{
         public void onCheckedChanged(RadioGroup group, int checkedId){
-            //dbManager.deleteById(checkedId);
-            Toast.makeText(DeleteActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
-
-            updateView();
+            toDelete = null;
+            for(int i = 0; i < items.size(); i++){
+                if(items.get(i).getId() == checkedId){
+                    toDelete = items.get(i);
+                    new DeleteItem().execute();
+                }
+            }
         }
     }
 
-    private class MakeConnection extends AsyncTask {
+    private class GetItems extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -96,6 +102,32 @@ public class DeleteActivity extends AppCompatActivity {
                 }
             });
             
+            return null;
+        }
+    }
+
+    private class DeleteItem extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            final boolean worked = database.deleteItem(toDelete);
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(worked){
+                        Toast.makeText(DeleteActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
+                        updateView();
+                    }
+                    else{
+                        Toast.makeText(DeleteActivity.this, "Item couldn't be deleted.", Toast.LENGTH_SHORT).show();
+                        updateView();
+                    }
+                }
+            });
+
+
             return null;
         }
     }

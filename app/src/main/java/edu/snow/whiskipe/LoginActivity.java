@@ -39,10 +39,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getBaseContext(), "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                        usernameEditText.setText("");
                     }
                 });
 
-                usernameEditText.setText("");
+
             }
             else{
                 runOnUiThread(new Runnable() {
